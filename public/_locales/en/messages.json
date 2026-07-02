@@ -137,6 +137,15 @@
   "shortcutsManageHint": {
     "message": "To change key combinations, open chrome://extensions/shortcuts in your browser."
   },
+  "aboutTitle": {
+    "message": "Open source"
+  },
+  "aboutDetail": {
+    "message": "View the project repository and license."
+  },
+  "aboutLicense": {
+    "message": "MIT License"
+  },
   "errorNoActiveTab": {
     "message": "No active tab is available."
   },

@@ -160,11 +160,7 @@ npm run build
 
 ## 截图与演示
 
-仓库当前未包含可引用的截图或演示资源。建议后续补充：
-
-- popup 尺寸选择界面截图。
-- 页面选区覆盖层截图。
-- 一张导出 PNG 与目标尺寸检查示例。
+![StoreShot 产品演示](https://i.postimg.cc/7ZpXmyDX/Store-Shot-Demo.png)
 
 ## 许可协议
 

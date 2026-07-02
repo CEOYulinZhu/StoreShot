@@ -137,6 +137,15 @@
   "shortcutsManageHint": {
     "message": "如需修改按键组合，请在浏览器中打开 chrome://extensions/shortcuts。"
   },
+  "aboutTitle": {
+    "message": "开源项目"
+  },
+  "aboutDetail": {
+    "message": "查看项目仓库和开源协议。"
+  },
+  "aboutLicense": {
+    "message": "MIT 开源协议"
+  },
   "errorNoActiveTab": {
     "message": "没有可用的当前标签页。"
   },

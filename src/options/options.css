@@ -214,6 +214,58 @@ body::-webkit-scrollbar-thumb {
   line-height: 1.42;
 }
 
+.repository-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 15px 16px;
+  border: 1px solid rgba(224, 226, 230, 0.72);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--theme_text);
+  text-decoration: none;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.repository-link:hover {
+  border-color: rgba(27, 97, 201, 0.42);
+  box-shadow: 0 0 0 2px rgba(27, 97, 201, 0.06);
+}
+
+.repository-link:focus-visible {
+  outline: none;
+  border-color: var(--theme_action);
+  box-shadow: 0 0 0 2px rgba(27, 97, 201, 0.08);
+}
+
+.repository-link img {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+
+.repository-link span {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.repository-link strong {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.repository-link small {
+  color: var(--theme_text-weak);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
 .select-wrap {
   position: relative;
   display: block;

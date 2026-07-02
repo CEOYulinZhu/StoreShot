@@ -100,6 +100,25 @@ function render(): void {
             .join("")}
           </div>
         </section>
+
+        <section class="panel" aria-labelledby="about-title">
+          <div class="section-heading">
+            <h2 id="about-title">${t("aboutTitle")}</h2>
+            <p>${t("aboutDetail")}</p>
+          </div>
+          <a
+            class="repository-link"
+            href="https://github.com/CEOYulinZhu/StoreShot"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img src="/icons/github.svg" alt="" aria-hidden="true" />
+            <span>
+              <strong>CEOYulinZhu/StoreShot</strong>
+              <small>${t("aboutLicense")}</small>
+            </span>
+          </a>
+        </section>
       </div>
     </main>
   `;
