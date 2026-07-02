@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extensionName__",
+  "short_name": "StoreShot",
+  "description": "__MSG_extensionDescription__",
+  "version": "1.0.0",
+  "default_locale": "en",
+  "action": {
+    "default_title": "__MSG_extensionName__",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "commands": {
+    "capture-store-screenshot-1280x800": {
+      "suggested_key": {
+        "default": "Alt+Shift+1"
+      },
+      "description": "__MSG_commandCaptureScreenshot__"
+    },
+    "capture-store-promo-440x280": {
+      "suggested_key": {
+        "default": "Alt+Shift+2"
+      },
+      "description": "__MSG_commandCapturePromo__"
+    },
+    "capture-store-banner-1400x560": {
+      "suggested_key": {
+        "default": "Alt+Shift+3"
+      },
+      "description": "__MSG_commandCaptureBanner__"
+    }
+  },
+  "permissions": ["activeTab", "scripting", "downloads", "storage"],
+  "icons": {
+    "16": "icons/icon128.png",
+    "32": "icons/icon128.png",
+    "48": "icons/icon128.png",
+    "128": "icons/icon128.png"
+  }
+}

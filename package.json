@@ -1,0 +1,17 @@
+{
+  "name": "storeshot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Chrome and Edge extension for creating store-ready screenshots at exact target sizes.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node scripts/validate-build.mjs",
+    "typecheck": "tsc --noEmit",
+    "validate": "node scripts/validate-build.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vite": "^5.4.11"
+  }
+}

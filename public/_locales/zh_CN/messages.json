@@ -1,0 +1,164 @@
+{
+  "extensionName": {
+    "message": "StoreShot"
+  },
+  "extensionDescription": {
+    "message": "在网页上选择区域，并为 Chrome 与 Edge 扩展商店素材导出严格尺寸截图。"
+  },
+  "popupTitle": {
+    "message": "StoreShot"
+  },
+  "popupSubtitle": {
+    "message": "从当前网页截图生成特定尺寸的扩展商店素材。"
+  },
+  "targetSize": {
+    "message": "目标尺寸"
+  },
+  "presets": {
+    "message": "常用预设"
+  },
+  "customSize": {
+    "message": "自定义尺寸"
+  },
+  "width": {
+    "message": "宽度"
+  },
+  "height": {
+    "message": "高度"
+  },
+  "pixels": {
+    "message": "像素"
+  },
+  "startCapture": {
+    "message": "开始截图"
+  },
+  "openOptions": {
+    "message": "选项"
+  },
+  "launching": {
+    "message": "启动中..."
+  },
+  "presetScreenshotTitle": {
+    "message": "截图"
+  },
+  "presetScreenshotDetail": {
+    "message": "1280 x 800"
+  },
+  "presetPromoTitle": {
+    "message": "宣传图"
+  },
+  "presetPromoDetail": {
+    "message": "440 x 280"
+  },
+  "presetBannerTitle": {
+    "message": "横幅图"
+  },
+  "presetBannerDetail": {
+    "message": "1400 x 560"
+  },
+  "commandCaptureScreenshot": {
+    "message": "开始 1280 x 800 截图"
+  },
+  "commandCapturePromo": {
+    "message": "开始 440 x 280 宣传图截图"
+  },
+  "commandCaptureBanner": {
+    "message": "开始 1400 x 560 横幅图截图"
+  },
+  "customPresetTitle": {
+    "message": "自定义"
+  },
+  "selectionToolbarSize": {
+    "message": "$1 x $2 -> $3 x $4 PNG"
+  },
+  "confirmCapture": {
+    "message": "导出 PNG"
+  },
+  "cancelCapture": {
+    "message": "取消"
+  },
+  "captureWorking": {
+    "message": "正在导出..."
+  },
+  "captureComplete": {
+    "message": "已下载 $1"
+  },
+  "optionsTitle": {
+    "message": "设置"
+  },
+  "optionsIntro": {
+    "message": "配置 StoreShot，让扩展商店截图制作更专注。"
+  },
+  "permissionsTitle": {
+    "message": "权限声明"
+  },
+  "permissionsDetail": {
+    "message": "StoreShot 只申请本地截图和下载所需的权限。"
+  },
+  "permissionActiveTab": {
+    "message": "仅在你启动 StoreShot 后截取当前可见标签页。"
+  },
+  "permissionScripting": {
+    "message": "向当前标签页注入截图选择层。"
+  },
+  "permissionDownloads": {
+    "message": "通过浏览器下载功能保存生成的 PNG。"
+  },
+  "permissionStorage": {
+    "message": "记住目标尺寸和语言偏好。"
+  },
+  "languagesTitle": {
+    "message": "语言支持"
+  },
+  "languagesDetail": {
+    "message": "选择 StoreShot 界面语言。自动模式会跟随浏览器语言。"
+  },
+  "languageAuto": {
+    "message": "自动"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageChinese": {
+    "message": "简体中文"
+  },
+  "shortcutsTitle": {
+    "message": "快捷键"
+  },
+  "shortcutsDetail": {
+    "message": "使用键盘快捷键，无需打开 popup 即可按预设开始截图。"
+  },
+  "shortcutsToggleTitle": {
+    "message": "启用预设快捷键"
+  },
+  "shortcutNotSet": {
+    "message": "未设置"
+  },
+  "shortcutsManageHint": {
+    "message": "如需修改按键组合，请在浏览器中打开 chrome://extensions/shortcuts。"
+  },
+  "errorNoActiveTab": {
+    "message": "没有可用的当前标签页。"
+  },
+  "errorRestrictedPage": {
+    "message": "当前页面无法截图。请在普通网站页面使用，不要在浏览器、商店或扩展页面使用。"
+  },
+  "errorInvalidSize": {
+    "message": "请输入有效的数字尺寸。"
+  },
+  "errorSizeTooSmall": {
+    "message": "宽高每边至少需要 64 像素。"
+  },
+  "errorSizeTooLarge": {
+    "message": "宽高每边不能超过 8000 像素。"
+  },
+  "errorSelectionTooSmall": {
+    "message": "选择区域太小，请放大后重试。"
+  },
+  "errorCanvasUnavailable": {
+    "message": "当前浏览器环境无法处理图片。"
+  },
+  "errorCaptureFailed": {
+    "message": "截图失败，请检查页面权限后重试。"
+  }
+}

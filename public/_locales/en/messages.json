@@ -1,0 +1,164 @@
+{
+  "extensionName": {
+    "message": "StoreShot"
+  },
+  "extensionDescription": {
+    "message": "Select an area on any page and export exact-size screenshots for Chrome and Edge store assets."
+  },
+  "popupTitle": {
+    "message": "StoreShot"
+  },
+  "popupSubtitle": {
+    "message": "Capture from the current page to create extension store assets at a specific size."
+  },
+  "targetSize": {
+    "message": "Target size"
+  },
+  "presets": {
+    "message": "Presets"
+  },
+  "customSize": {
+    "message": "Custom size"
+  },
+  "width": {
+    "message": "Width"
+  },
+  "height": {
+    "message": "Height"
+  },
+  "pixels": {
+    "message": "px"
+  },
+  "startCapture": {
+    "message": "Start capture"
+  },
+  "openOptions": {
+    "message": "Options"
+  },
+  "launching": {
+    "message": "Starting..."
+  },
+  "presetScreenshotTitle": {
+    "message": "Screenshot"
+  },
+  "presetScreenshotDetail": {
+    "message": "1280 x 800"
+  },
+  "presetPromoTitle": {
+    "message": "Promo image"
+  },
+  "presetPromoDetail": {
+    "message": "440 x 280"
+  },
+  "presetBannerTitle": {
+    "message": "Wide image"
+  },
+  "presetBannerDetail": {
+    "message": "1400 x 560"
+  },
+  "commandCaptureScreenshot": {
+    "message": "Start a 1280 x 800 screenshot capture"
+  },
+  "commandCapturePromo": {
+    "message": "Start a 440 x 280 promo image capture"
+  },
+  "commandCaptureBanner": {
+    "message": "Start a 1400 x 560 wide image capture"
+  },
+  "customPresetTitle": {
+    "message": "Custom"
+  },
+  "selectionToolbarSize": {
+    "message": "$1 x $2 -> $3 x $4 PNG"
+  },
+  "confirmCapture": {
+    "message": "Export PNG"
+  },
+  "cancelCapture": {
+    "message": "Cancel"
+  },
+  "captureWorking": {
+    "message": "Exporting..."
+  },
+  "captureComplete": {
+    "message": "Downloaded $1"
+  },
+  "optionsTitle": {
+    "message": "Settings"
+  },
+  "optionsIntro": {
+    "message": "Configure StoreShot for a focused extension-store screenshot workflow."
+  },
+  "permissionsTitle": {
+    "message": "Permission statement"
+  },
+  "permissionsDetail": {
+    "message": "StoreShot only requests the permissions needed for local capture and download."
+  },
+  "permissionActiveTab": {
+    "message": "Capture only the current visible tab after you start StoreShot."
+  },
+  "permissionScripting": {
+    "message": "Inject the selection overlay into the current tab."
+  },
+  "permissionDownloads": {
+    "message": "Save the generated PNG through browser downloads."
+  },
+  "permissionStorage": {
+    "message": "Remember your target size and language preference."
+  },
+  "languagesTitle": {
+    "message": "Languages"
+  },
+  "languagesDetail": {
+    "message": "Choose the display language for StoreShot UI. Auto follows the browser language."
+  },
+  "languageAuto": {
+    "message": "Auto"
+  },
+  "languageEnglish": {
+    "message": "English"
+  },
+  "languageChinese": {
+    "message": "简体中文"
+  },
+  "shortcutsTitle": {
+    "message": "Shortcuts"
+  },
+  "shortcutsDetail": {
+    "message": "Use keyboard shortcuts to start a preset capture without opening the popup."
+  },
+  "shortcutsToggleTitle": {
+    "message": "Enable preset shortcuts"
+  },
+  "shortcutNotSet": {
+    "message": "Not set"
+  },
+  "shortcutsManageHint": {
+    "message": "To change key combinations, open chrome://extensions/shortcuts in your browser."
+  },
+  "errorNoActiveTab": {
+    "message": "No active tab is available."
+  },
+  "errorRestrictedPage": {
+    "message": "This page cannot be captured. Try a normal website tab instead of a browser, store, or extension page."
+  },
+  "errorInvalidSize": {
+    "message": "Enter a valid numeric size."
+  },
+  "errorSizeTooSmall": {
+    "message": "Size must be at least 64 px on each side."
+  },
+  "errorSizeTooLarge": {
+    "message": "Size must be 8000 px or smaller on each side."
+  },
+  "errorSelectionTooSmall": {
+    "message": "Selection is too small. Make the area larger and try again."
+  },
+  "errorCanvasUnavailable": {
+    "message": "Image processing is unavailable in this browser context."
+  },
+  "errorCaptureFailed": {
+    "message": "Capture failed. Check page permissions and try again."
+  }
+}
