@@ -168,4 +168,4 @@ npm run build
 
 ## 许可协议
 
-当前仓库未发现 `LICENSE` 或同类许可文件。开源发布前建议补充明确的许可证，并在 README 中引用对应协议。
+本项目基于 [MIT License](LICENSE) 开源。
