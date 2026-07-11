@@ -21,6 +21,7 @@ if (missing.length > 0) {
 }
 
 const manifest = JSON.parse(readFileSync(join(dist, "manifest.json"), "utf8"));
+const contentScript = readFileSync(join(dist, "content.js"), "utf8");
 
 // 权限和国际化是 StoreShot 的可信边界：构建产物不应悄悄扩大 host 权限或丢失语言声明。
 assert(manifest.manifest_version === 3, "manifest_version must be 3.");
@@ -38,6 +39,10 @@ for (const permission of ["activeTab", "scripting", "downloads", "storage"]) {
 }
 
 assert(!manifest.host_permissions, "host_permissions should not be requested.");
+assert(
+  !/\b(?:import|export)\s*(?:\{|\*|default|["'])/.test(contentScript),
+  "content.js must be a classic script without ESM import/export syntax."
+);
 for (const size of ["16", "32", "48", "128"]) {
   assert(manifest.icons?.[size] === "icons/icon128.png", `icon ${size} must point to icon128.png.`);
 }

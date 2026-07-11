@@ -2,7 +2,13 @@ import { cropScreenshotToTarget } from "../shared/image";
 import { getPresetIdForCommand } from "../shared/commands";
 import { captureError, isStoreShotMessage } from "../shared/messages";
 import { startSelectionForPreset } from "../shared/selection";
-import { loadSettings, loadShortcutSettings } from "../shared/storage";
+import { createSelectionPositionKey, normalizeSelectionRect } from "../shared/selection-position";
+import {
+  loadSelectionPositionSettings,
+  loadSettings,
+  loadShortcutSettings,
+  saveSelectionPosition
+} from "../shared/storage";
 import type { CaptureResult, CaptureSelectionPayload } from "../shared/types";
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -64,6 +70,8 @@ async function handleCapture(
       conflictAction: "uniquify"
     });
 
+    await rememberSuccessfulSelection(payload, tab.url);
+
     return {
       ok: true,
       filename
@@ -74,6 +82,24 @@ async function handleCapture(
     }
 
     throw new Error("errorCaptureFailed");
+  }
+}
+
+async function rememberSuccessfulSelection(payload: CaptureSelectionPayload, tabUrl: string | undefined): Promise<void> {
+  try {
+    const settings = await loadSelectionPositionSettings();
+    if (!settings.rememberSelectionPosition) {
+      return;
+    }
+
+    const key = createSelectionPositionKey(tabUrl, payload.targetSize);
+    const normalizedRect = normalizeSelectionRect(payload.rect, payload.viewport);
+    if (key && normalizedRect) {
+      await saveSelectionPosition(key, normalizedRect);
+    }
+  } catch (error) {
+    // 下载已经成功；位置记忆是非关键能力，存储失败不能改变截图结果。
+    console.warn("[StoreShot] Selection position could not be saved.", error);
   }
 }
 

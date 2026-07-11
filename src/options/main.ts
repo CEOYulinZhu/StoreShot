@@ -8,9 +8,14 @@ import {
 } from "../shared/i18n";
 import { getPresetShortcuts, type PresetShortcutMap } from "../shared/commands";
 import { SIZE_PRESETS } from "../shared/presets";
-import { loadShortcutSettings, saveShortcutSettings } from "../shared/storage";
+import {
+  loadSelectionPositionSettings,
+  loadShortcutSettings,
+  saveSelectionPositionSettings,
+  saveShortcutSettings
+} from "../shared/storage";
 import type { LocalePreference } from "../shared/locales";
-import type { ShortcutSettings } from "../shared/types";
+import type { SelectionPositionSettings, ShortcutSettings } from "../shared/types";
 
 const app = document.querySelector<HTMLDivElement>("#app");
 
@@ -20,6 +25,7 @@ if (!app) {
 
 const appRoot = app;
 let shortcutSettings: ShortcutSettings = { shortcutsEnabled: true };
+let selectionPositionSettings: SelectionPositionSettings = { rememberSelectionPosition: true };
 let presetShortcuts: PresetShortcutMap = {};
 
 void init();
@@ -27,6 +33,7 @@ void init();
 async function init(): Promise<void> {
   await loadLocalePreference();
   shortcutSettings = await loadShortcutSettings();
+  selectionPositionSettings = await loadSelectionPositionSettings();
   presetShortcuts = await loadPresetShortcuts();
   render();
 }
@@ -82,6 +89,23 @@ function render(): void {
           <p class="shortcut-note">${t("shortcutsManageHint")}</p>
         </section>
 
+        <section class="panel" aria-labelledby="selection-position-title">
+          <div class="section-heading">
+            <h2 id="selection-position-title">${t("selectionPositionTitle")}</h2>
+            <p>${t("selectionPositionDetail")}</p>
+          </div>
+          <label class="toggle-row" for="selection-position-enabled">
+            <span>
+              <strong>${t("selectionPositionToggleTitle")}</strong>
+            </span>
+            <input
+              id="selection-position-enabled"
+              type="checkbox"
+              ${selectionPositionSettings.rememberSelectionPosition ? "checked" : ""}
+            />
+          </label>
+        </section>
+
         <section class="panel" aria-labelledby="permissions-title">
           <div class="section-heading">
             <h2 id="permissions-title">${t("permissionsTitle")}</h2>
@@ -129,6 +153,15 @@ function render(): void {
   appRoot.querySelector<HTMLInputElement>("#shortcuts-enabled")?.addEventListener("change", (event) => {
     void updateShortcutsEnabled((event.currentTarget as HTMLInputElement).checked);
   });
+  appRoot.querySelector<HTMLInputElement>("#selection-position-enabled")?.addEventListener("change", (event) => {
+    void updateSelectionPositionEnabled((event.currentTarget as HTMLInputElement).checked);
+  });
+}
+
+async function updateSelectionPositionEnabled(rememberSelectionPosition: boolean): Promise<void> {
+  selectionPositionSettings = { rememberSelectionPosition };
+  await saveSelectionPositionSettings(selectionPositionSettings);
+  render();
 }
 
 async function updateLanguage(preference: LocalePreference): Promise<void> {

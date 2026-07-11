@@ -1,11 +1,24 @@
 import { getChrome } from "./chrome";
 import { DEFAULT_SETTINGS, SIZE_PRESETS, getSizeForPreset, validateSize } from "./presets";
-import type { ShortcutSettings, StoreShotSettings, StoreShotPresetId, TargetSize } from "./types";
+import { isNormalizedSelectionRect } from "./selection-position";
+import type {
+  NormalizedSelectionRect,
+  SelectionPositionSettings,
+  ShortcutSettings,
+  StoreShotSettings,
+  StoreShotPresetId,
+  TargetSize
+} from "./types";
 
 const SETTINGS_KEY = "storeshot.settings";
 const SHORTCUT_SETTINGS_KEY = "storeshot.shortcuts";
+const SELECTION_POSITION_SETTINGS_KEY = "storeshot.selectionPositionSettings";
+const SELECTION_POSITIONS_KEY = "storeshot.selectionPositions";
 const DEFAULT_SHORTCUT_SETTINGS: ShortcutSettings = {
   shortcutsEnabled: true
+};
+const DEFAULT_SELECTION_POSITION_SETTINGS: SelectionPositionSettings = {
+  rememberSelectionPosition: true
 };
 
 export async function loadSettings(): Promise<StoreShotSettings> {
@@ -67,4 +80,42 @@ export async function loadShortcutSettings(): Promise<ShortcutSettings> {
 
 export async function saveShortcutSettings(settings: ShortcutSettings): Promise<void> {
   await getChrome().storage.sync.set({ [SHORTCUT_SETTINGS_KEY]: settings });
+}
+
+export async function loadSelectionPositionSettings(): Promise<SelectionPositionSettings> {
+  const data = await getChrome().storage.sync.get(SELECTION_POSITION_SETTINGS_KEY);
+  const raw = data[SELECTION_POSITION_SETTINGS_KEY] as Partial<SelectionPositionSettings> | undefined;
+
+  return {
+    rememberSelectionPosition:
+      typeof raw?.rememberSelectionPosition === "boolean"
+        ? raw.rememberSelectionPosition
+        : DEFAULT_SELECTION_POSITION_SETTINGS.rememberSelectionPosition
+  };
+}
+
+export async function saveSelectionPositionSettings(settings: SelectionPositionSettings): Promise<void> {
+  await getChrome().storage.sync.set({ [SELECTION_POSITION_SETTINGS_KEY]: settings });
+}
+
+export async function loadSelectionPosition(key: string): Promise<NormalizedSelectionRect | null> {
+  const data = await getChrome().storage.local.get(SELECTION_POSITIONS_KEY);
+  const raw = data[SELECTION_POSITIONS_KEY];
+  if (typeof raw !== "object" || raw === null || Array.isArray(raw)) {
+    return null;
+  }
+
+  const value = (raw as Record<string, unknown>)[key];
+  return isNormalizedSelectionRect(value) ? value : null;
+}
+
+export async function saveSelectionPosition(key: string, rect: NormalizedSelectionRect): Promise<void> {
+  const data = await getChrome().storage.local.get(SELECTION_POSITIONS_KEY);
+  const raw = data[SELECTION_POSITIONS_KEY];
+  const positions = typeof raw === "object" && raw !== null && !Array.isArray(raw)
+    ? { ...(raw as Record<string, unknown>) }
+    : {};
+
+  positions[key] = rect;
+  await getChrome().storage.local.set({ [SELECTION_POSITIONS_KEY]: positions });
 }

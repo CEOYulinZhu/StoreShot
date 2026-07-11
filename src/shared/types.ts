@@ -25,11 +25,19 @@ export interface ShortcutSettings {
   shortcutsEnabled: boolean;
 }
 
+export interface SelectionPositionSettings {
+  rememberSelectionPosition: boolean;
+}
+
 export interface SelectionRect {
   x: number;
   y: number;
   width: number;
   height: number;
+}
+
+export interface NormalizedSelectionRect extends SelectionRect {
+  viewportAspectRatio: number;
 }
 
 export interface ViewportSnapshot {
@@ -41,6 +49,7 @@ export interface ViewportSnapshot {
 export interface StartSelectionPayload {
   targetSize: TargetSize;
   presetId: StoreShotPresetId;
+  savedRect?: NormalizedSelectionRect;
 }
 
 export interface CaptureSelectionPayload {

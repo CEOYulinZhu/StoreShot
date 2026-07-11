@@ -137,6 +137,15 @@
   "shortcutsManageHint": {
     "message": "To change key combinations, open chrome://extensions/shortcuts in your browser."
   },
+  "selectionPositionTitle": {
+    "message": "Selection position"
+  },
+  "selectionPositionDetail": {
+    "message": "Restore the last successful selection separately for each website and target size."
+  },
+  "selectionPositionToggleTitle": {
+    "message": "Remember selection position"
+  },
   "aboutTitle": {
     "message": "Open source"
   },

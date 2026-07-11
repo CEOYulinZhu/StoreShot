@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build && node scripts/validate-build.mjs",
+    "build": "tsc --noEmit && vite build && vite build --config vite.content.config.ts && node scripts/validate-build.mjs",
     "typecheck": "tsc --noEmit",
     "validate": "node scripts/validate-build.mjs"
   },

@@ -1,4 +1,5 @@
 import { getChrome } from "./chrome";
+import { isNormalizedSelectionRect } from "./selection-position";
 import type { CaptureResult, StoreShotMessage } from "./types";
 
 export async function sendTabMessage<TResponse>(
@@ -9,13 +10,58 @@ export async function sendTabMessage<TResponse>(
 }
 
 export function isStoreShotMessage(message: unknown): message is StoreShotMessage {
-  // 内容脚本和后台页都可能收到其他扩展消息；只接受 StoreShot 自己的消息命名空间。
+  if (typeof message !== "object" || message === null || !("type" in message) || !("payload" in message)) {
+    return false;
+  }
+
+  const candidate = message as { type: unknown; payload: unknown };
+  if (typeof candidate.payload !== "object" || candidate.payload === null) {
+    return false;
+  }
+
+  const payload = candidate.payload as Record<string, unknown>;
+  if (candidate.type === "STORESHOT_START_SELECTION") {
+    return (
+      isTargetSize(payload.targetSize) &&
+      typeof payload.presetId === "string" &&
+      (payload.savedRect === undefined || isNormalizedSelectionRect(payload.savedRect))
+    );
+  }
+
+  if (candidate.type === "STORESHOT_CAPTURE_SELECTION") {
+    return isRect(payload.rect) && isViewport(payload.viewport) && isTargetSize(payload.targetSize);
+  }
+
+  return false;
+}
+
+function isTargetSize(value: unknown): boolean {
+  return isFiniteRecord(value, ["width", "height"]) && value.width > 0 && value.height > 0;
+}
+
+function isRect(value: unknown): boolean {
   return (
-    typeof message === "object" &&
-    message !== null &&
-    "type" in message &&
-    typeof (message as { type: unknown }).type === "string" &&
-    (message as { type: string }).type.startsWith("STORESHOT_")
+    isFiniteRecord(value, ["x", "y", "width", "height"]) &&
+    value.width > 0 &&
+    value.height > 0
+  );
+}
+
+function isViewport(value: unknown): boolean {
+  return (
+    isFiniteRecord(value, ["width", "height", "devicePixelRatio"]) &&
+    value.width > 0 &&
+    value.height > 0 &&
+    value.devicePixelRatio > 0
+  );
+}
+
+function isFiniteRecord<T extends string>(value: unknown, keys: T[]): value is Record<T, number> {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    keys.every((key) => typeof (value as Record<string, unknown>)[key] === "number" &&
+      Number.isFinite((value as Record<string, number>)[key]))
   );
 }
 

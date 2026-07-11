@@ -1,4 +1,6 @@
 import styles from "./overlay.css?inline";
+import { isStoreShotMessage } from "../shared/messages";
+import { restoreSelectionRect } from "../shared/selection-position";
 import type { CaptureResult, SelectionRect, StartSelectionPayload } from "../shared/types";
 
 const HOST_ID = "storeshot-overlay-host";
@@ -23,19 +25,6 @@ function t(key: string, substitutions?: string | string[]): string {
   return message || key;
 }
 
-function isStoreShotMessage(message: unknown): message is {
-  type: "STORESHOT_START_SELECTION" | "STORESHOT_CAPTURE_SELECTION";
-  payload: StartSelectionPayload;
-} {
-  return (
-    typeof message === "object" &&
-    message !== null &&
-    "type" in message &&
-    typeof (message as { type: unknown }).type === "string" &&
-    (message as { type: string }).type.startsWith("STORESHOT_")
-  );
-}
-
 class SelectionController {
   private readonly host: HTMLDivElement;
   private readonly root: ShadowRoot;
@@ -48,7 +37,14 @@ class SelectionController {
 
   constructor(private readonly payload: StartSelectionPayload) {
     this.targetRatio = payload.targetSize.width / payload.targetSize.height;
-    this.rect = this.createInitialRect();
+    this.rect =
+      restoreSelectionRect(
+        payload.savedRect,
+        window.innerWidth,
+        window.innerHeight,
+        payload.targetSize,
+        MIN_SELECTION
+      ) ?? this.createInitialRect();
     this.host = document.createElement("div");
     this.host.id = HOST_ID;
     // 选择层挂在 Shadow DOM 中，尽量避免被宿主页面的全局样式影响，也不把扩展样式泄漏回页面。

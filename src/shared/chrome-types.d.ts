@@ -11,6 +11,7 @@ declare namespace chrome {
     }
 
     const sync: StorageArea;
+    const local: StorageArea;
   }
 
   namespace tabs {

@@ -1,6 +1,7 @@
 import { getChrome } from "./chrome";
 import { sendTabMessage } from "./messages";
-import { updateSelectedSize } from "./storage";
+import { createSelectionPositionKey } from "./selection-position";
+import { loadSelectionPosition, loadSelectionPositionSettings, updateSelectedSize } from "./storage";
 import type { StoreShotMessage, StoreShotPresetId, StoreShotSettings, TargetSize } from "./types";
 
 export async function startSelectionForPreset(
@@ -15,11 +16,23 @@ export async function startSelectionForPreset(
     throw new Error("errorNoActiveTab");
   }
 
+  let savedRect;
+  try {
+    const positionSettings = await loadSelectionPositionSettings();
+    const positionKey = positionSettings.rememberSelectionPosition
+      ? createSelectionPositionKey(tab.url, settings.lastSize)
+      : null;
+    savedRect = positionKey ? await loadSelectionPosition(positionKey) : null;
+  } catch (error) {
+    console.warn("[StoreShot] Saved selection position could not be loaded.", error);
+  }
+
   const message: StoreShotMessage = {
     type: "STORESHOT_START_SELECTION",
     payload: {
       targetSize: settings.lastSize,
-      presetId: settings.presetId
+      presetId: settings.presetId,
+      ...(savedRect ? { savedRect } : {})
     }
   };
 
